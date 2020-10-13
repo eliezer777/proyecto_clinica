@@ -141,13 +141,13 @@ namespace web_umg_bd
         protected global::System.Web.UI.WebControls.TextBox txt_genero;
 
         /// <summary>
-        /// Control lbl_sangre.
+        /// Control lbl_puesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_sangre;
+        protected global::System.Web.UI.WebControls.Label lbl_puesto;
 
         /// <summary>
         /// Control drop_puesto.

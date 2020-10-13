@@ -21,8 +21,8 @@ namespace web_umg_bd
 
         protected void btn_agregar_Click(object sender, EventArgs e)
         {
-            empleado = new Empleado();
-            if (empleado.agregar(txt_codigo.Text,txt_nombres.Text,txt_apellidos.Text,txt_direccion.Text,txt_telefono.Text,txt_fn.Text,Convert.ToInt32(drop_puesto.SelectedValue)) > 0){
+            empleado= new Empleado();
+            if (empleado.agregar(txt_nombres.Text, txt_apellidos.Text, txt_edad.Text, txt_telefono.Text, txt_fn.Text, txt_areal.Text, txt_genero.Text, Convert.ToInt32(drop_puesto.SelectedValue)) > 0){
                 lbl_mensaje.Text = "Ingreso Exitoso";
                 empleado.grid_empleados(grid_empleados);
 
@@ -33,13 +33,14 @@ namespace web_umg_bd
         {
             //grid_empleados.SelectedValue.ToString();
             //grid_empleados.DataKeys[indice].Values["id"].ToString();
-            txt_codigo.Text = grid_empleados.SelectedRow.Cells[2].Text;
-            txt_nombres.Text = grid_empleados.SelectedRow.Cells[3].Text;
-            txt_apellidos.Text = grid_empleados.SelectedRow.Cells[4].Text;
-            txt_direccion.Text = grid_empleados.SelectedRow.Cells[5].Text;
-            txt_telefono.Text = grid_empleados.SelectedRow.Cells[6].Text;
-            DateTime fecha = Convert.ToDateTime(grid_empleados.SelectedRow.Cells[7].Text);
+            txt_nombres.Text = grid_empleados.SelectedRow.Cells[2].Text;
+            txt_apellidos.Text = grid_empleados.SelectedRow.Cells[3].Text;
+            txt_edad.Text = grid_empleados.SelectedRow.Cells[4].Text;
+            txt_telefono.Text = grid_empleados.SelectedRow.Cells[5].Text;
+            DateTime fecha = Convert.ToDateTime(grid_empleados.SelectedRow.Cells[6].Text);
             txt_fn.Text  = fecha.ToString("yyyy-MM-dd");
+            txt_areal.Text = grid_empleados.SelectedRow.Cells[7].Text;
+            txt_genero.Text = grid_empleados.SelectedRow.Cells[8].Text;
             int indice = grid_empleados.SelectedRow.RowIndex;
             drop_puesto.SelectedValue = grid_empleados.DataKeys[indice].Values["id_puesto"].ToString();
 
@@ -66,7 +67,7 @@ namespace web_umg_bd
         {
 
             empleado = new Empleado();
-            if (empleado.modificar(Convert.ToInt32(grid_empleados.SelectedValue), txt_codigo.Text, txt_nombres.Text, txt_apellidos.Text, txt_direccion.Text, txt_telefono.Text, txt_fn.Text, Convert.ToInt32(drop_puesto.SelectedValue)) > 0)
+            if (empleado.modificar(Convert.ToInt32(grid_empleados.SelectedValue), txt_nombres.Text, txt_apellidos.Text, txt_edad.Text, txt_telefono.Text, txt_fn.Text, txt_areal.Text, txt_genero.Text, Convert.ToInt32(drop_puesto.SelectedValue)) > 0)
             {
                 lbl_mensaje.Text = "Modificacion Exitoso";
                 empleado.grid_empleados(grid_empleados);

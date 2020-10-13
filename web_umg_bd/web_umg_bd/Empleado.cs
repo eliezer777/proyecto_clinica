@@ -25,7 +25,7 @@ namespace web_umg_bd
             drop.ClearSelection();
             drop.Items.Clear();
             drop.AppendDataBoundItems = true;
-            drop.Items.Add("<< Elige Puesto >>");
+            drop.Items.Add("<< Elige Puesto>>");
             drop.Items[0].Value = "0";
             drop.DataSource = drop_puesto();
             drop.DataTextField = "puesto";
@@ -37,22 +37,23 @@ namespace web_umg_bd
             DataTable tabla = new DataTable();
             conectar = new ConexionBD();
             conectar.AbrirConexion();
-            String consulta = string.Format("select e.id_empleado as id,e.codigo,e.nombres,e.apellidos,e.direccion,e.telefono,e.fecha_nacimiento,p.puesto,p.id_puesto from empleados as e inner join puestos as p on e.id_puesto = p.id_puesto;");
+            String consulta = string.Format("select e.id_empleado as id,e.nombres,e.apellidos,e.edad,e.telefono,e.fecha_nacimiento, e.areal, e.genero,p.puesto,p.id_puesto from empleados as e inner join puestos as p on e.id_puesto = p.id_puesto;");
             MySqlDataAdapter query = new MySqlDataAdapter(consulta, conectar.conectar);
             query.Fill(tabla);
             conectar.CerarConexion();
             return tabla;
         }
-        public void grid_empleados(GridView grid){
+        public void grid_empleados(GridView grid)
+        {
             grid.DataSource = grid_empleados();
             grid.DataBind();
 
         }
-        public int agregar(string codigo,string nombres,string apellidos,string direccion,string telefono,string fecha,int id_puesto){
+        public int agregar(string nombres,string apellidos,string edad,string telefono,string fecha, string areal, string genero, int id_puesto){
             int no_ingreso = 0;
             conectar = new ConexionBD();
             conectar.AbrirConexion();
-            string strConsulta = string.Format("insert into empleados(codigo,nombres,apellidos,direccion,telefono,fecha_nacimiento,id_puesto) values('{0}','{1}','{2}','{3}','{4}','{5}',{6});",codigo,nombres,apellidos,direccion,telefono,fecha,id_puesto);
+            string strConsulta = string.Format("insert into empleados(nombres,apellidos,edad,telefono,fecha_nacimiento,areal,genero,id_puesto) values('{0}','{1}','{2}','{3}','{4}','{5}',{6},'{7}');",nombres,apellidos,edad,telefono,fecha,areal,genero,id_puesto);
             MySqlCommand insertar = new MySqlCommand(strConsulta, conectar.conectar);
             
             insertar.Connection = conectar.conectar;
@@ -61,12 +62,12 @@ namespace web_umg_bd
             return no_ingreso;
 
         }
-        public int modificar(int id,string codigo, string nombres, string apellidos, string direccion, string telefono, string fecha, int id_puesto)
+        public int modificar(int id,string nombres, string apellidos, string edad, string telefono, string fecha, string areal, string genero, int id_puesto)
         {
             int no_ingreso = 0;
             conectar = new ConexionBD();
             conectar.AbrirConexion();
-            string strConsulta = string.Format("update empleados set codigo = '{0}',nombres='{1}',apellidos='{2}',direccion='{3}',telefono='{4}',fecha_nacimiento='{5}',id_puesto ={6} where id_empleado ={7};", codigo, nombres, apellidos, direccion, telefono, fecha, id_puesto,id);
+            string strConsulta = string.Format("update empleados set nombres = '{0}',apellidos='{1}',edad='{2}',telefono='{3}',fecha_nacimiento='{4}',areal='{5}',genero='{6}',id_puesto ={7} where id_empleado ={8};", nombres, apellidos, edad, telefono, fecha, areal, genero, id_puesto,id);
             MySqlCommand insertar = new MySqlCommand(strConsulta, conectar.conectar);
 
             insertar.Connection = conectar.conectar;
